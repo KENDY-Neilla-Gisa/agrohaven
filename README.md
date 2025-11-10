@@ -1,20 +1,20 @@
-# 🌱 AgroHaven - Modern Agricultural E-commerce Platform
+# 🌿 AgroHaven - Sustainable Indoor Farming Solutions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-4.4.5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3.3-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
-AgroHaven is a modern e-commerce platform designed specifically for agricultural products, connecting farmers directly with consumers. Built with the latest web technologies, it provides a seamless shopping experience for fresh, locally-sourced produce.
+AgroHaven is revolutionizing the way people grow food at home. Our mission is to help people breathe cleaner air, eat fresher food, and live more sustainably - all from the comfort of their homes. We provide innovative indoor farming solutions that make it easy for anyone to grow fresh, healthy food regardless of space or gardening experience.
 
 ## 🌟 Features
 
-- **Farm-Fresh Products**: Browse a wide variety of fresh, organic produce
-- **Farmer Direct**: Connect directly with local farmers and producers
-- **Secure Checkout**: Safe and secure payment processing
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **User Authentication**: Secure signup and login system
-- **Product Search & Filtering**: Easily find what you're looking for
+- **Indoor Farming Kits**: Complete solutions for growing fresh produce at home
+- **Smart Growing Systems**: Technology-driven farming for optimal plant growth
+- **Educational Resources**: Learn how to grow and maintain your indoor garden
+- **Community Support**: Connect with other urban farmers and share experiences
+- **Sustainable Living**: Reduce your carbon footprint with home-grown food
+- **Space-Efficient Designs**: Perfect for apartments and small spaces
 
 ## 🚀 Getting Started
 
