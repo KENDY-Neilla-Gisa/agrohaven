@@ -1,0 +1,84 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Hide Scrollbar Completely */
+@layer utilities {
+  /* For WebKit (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* For Firefox */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+/* Base styles */
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  body {
+    @apply bg-white text-gray-900;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl leading-snug;
+  }
+}
+
+/* Component classes */
+.btn {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:-translate-y-0.5;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-outline {
+  @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-50;
+}
+
+.section {
+  @apply py-16 md:py-24 lg:py-32;
+}
+
+.container {
+  @apply w-full mx-auto px-4 md:px-6 lg:px-8 max-w-7xl;
+}
