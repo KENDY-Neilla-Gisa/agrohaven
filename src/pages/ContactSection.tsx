@@ -18,9 +18,7 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     console.log('Form submitted:', formData);
-    // Reset form
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -59,11 +57,11 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <motion.h2 
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -72,7 +70,7 @@ const ContactSection = () => {
             Get In Touch
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -89,53 +87,54 @@ const ContactSection = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="-mt-6"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <div className="pt-0">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
                   required
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-green-700 transition-colors duration-200"
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium transition-colors duration-200"
               >
                 Send Message
               </button>
@@ -153,20 +152,20 @@ const ContactSection = () => {
               {contactInfo.map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-green-50 transition-colors duration-200"
+                  className="flex items-start space-x-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-green-50 dark:hover:bg-gray-700 transition-colors duration-200 border border-gray-200 dark:border-gray-700"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
                 >
-                  <div className="bg-green-100 p-3 rounded-full">
+                  <div className="bg-green-100 dark:bg-gray-700 p-3 rounded-full transition-colors duration-200 group-hover:bg-green-200 dark:group-hover:bg-gray-600">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-200">{item.title}</h3>
                     <a 
                       href={item.link} 
-                      className="text-gray-600 hover:text-green-600 transition-colors duration-200"
+                      className="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200 flex items-center"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -178,39 +177,39 @@ const ContactSection = () => {
             </div>
 
             <div className="mt-8">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Follow Us</h3>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Follow Us</h3>
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors duration-200"
+                  className="w-10 h-10 rounded-full bg-green-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-white hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 transition-colors duration-200"
                   aria-label="Facebook"
                 >
                   <i className="fab fa-facebook-f text-lg"></i>
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-400 transition-colors duration-200"
+                  className="w-10 h-10 rounded-full bg-green-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-white hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-400 transition-colors duration-200"
                   aria-label="Twitter"
                 >
                   <i className="fab fa-twitter text-lg"></i>
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-100 hover:text-pink-600 transition-colors duration-200"
+                  className="w-10 h-10 rounded-full bg-green-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-white hover:bg-pink-100 dark:hover:bg-gray-700 hover:text-pink-600 transition-colors duration-200"
                   aria-label="Instagram"
                 >
                   <i className="fab fa-instagram text-lg"></i>
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200"
+                  className="w-10 h-10 rounded-full bg-green-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-white hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-700 transition-colors duration-200"
                   aria-label="LinkedIn"
                 >
                   <i className="fab fa-linkedin-in text-lg"></i>
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-red-100 hover:text-red-600 transition-colors duration-200"
+                  className="w-10 h-10 rounded-full bg-green-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-white hover:bg-red-100 dark:hover:bg-gray-700 hover:text-red-600 transition-colors duration-200"
                   aria-label="YouTube"
                 >
                   <i className="fab fa-youtube text-lg"></i>

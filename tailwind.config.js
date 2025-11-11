@@ -4,10 +4,16 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+    },
     extend: {
       colors: {
+        // Light theme colors
         primary: {
+          DEFAULT: '#22c55e',
           50: '#f0fdf4',
           100: '#dcfce7',
           200: '#bbf7d0',
@@ -19,27 +25,30 @@ export default {
           800: '#166534',
           900: '#14532d',
         },
-        // Add button variants
-        button: {
-          primary: '#22c55e',
-          'primary-hover': '#16a34a',
-          'primary-text': '#ffffff',
+        // Dark theme colors (from the design)
+        dark: {
+          background: '#0f172a',
+          surface: '#1e293b',
+          card: '#1e293b',
+          'card-hover': '#334155',
+          text: '#f8fafc',
+          'text-muted': '#94a3b8',
+          border: '#334155',
         },
-        secondary: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+        // Light theme colors (from the design)
+        light: {
+          background: '#ffffff',
+          surface: '#f8fafc',
+          card: '#ffffff',
+          'card-hover': '#f1f5f9',
+          text: '#0f172a',
+          'text-muted': '#64748b',
+          border: '#e2e8f0',
         },
       },
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+      boxShadow: {
+        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        'card-dark': '0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2)',
       },
     },
   },

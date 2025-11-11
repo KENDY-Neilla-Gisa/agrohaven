@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+/// <reference types="node" />
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
@@ -19,88 +20,117 @@ const ScrollableLayout = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Debounce function to limit how often we check scroll position
+  const debounce = useCallback((func: Function, wait: number) => {
+    return function executedFunction(...args: any[]) {
+      const later = () => {
+        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+        func(...args);
+      };
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(later, wait);
+    };
+  }, []);
 
   // Update current section based on scroll position
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (!containerRef.current || isScrolling.current) return;
     
-    const scrollPosition = containerRef.current.scrollTop;
-    const windowHeight = window.innerHeight;
+    const container = containerRef.current;
+    const scrollPosition = container.scrollTop + (container.clientHeight / 3);
+    const sections = Array.from(container.children[0].children).slice(0, -1) as HTMLElement[];
     
     // Find which section is currently in view
-    const current = Math.round(scrollPosition / windowHeight);
-    setCurrentSection(Math.min(Math.max(0, current), sections.length - 1));
-  };
-
-  // Add scroll event listener
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScroll, { passive: true });
-      return () => container.removeEventListener('scroll', handleScroll);
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        setCurrentSection(i);
+        break;
+      }
     }
   }, []);
 
+  // Create a debounced version of handleScroll
+  const debouncedHandleScroll = useCallback(debounce(handleScroll, 50), [handleScroll]);
+
+  // Add scroll event listener with debounce
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', debouncedHandleScroll, { passive: true });
+      return () => {
+        container.removeEventListener('scroll', debouncedHandleScroll);
+        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      };
+    }
+  }, [debouncedHandleScroll]);
+
   // Handle navigation
-  const goToSection = (index: number) => {
+  const goToSection = useCallback((index: number) => {
     if (index < 0 || index >= sections.length) return;
     
     isScrolling.current = true;
     setCurrentSection(index);
     
     if (containerRef.current) {
-      containerRef.current.scrollTo({
-        top: window.innerHeight * index,
-        behavior: 'smooth'
-      });
+      const sectionElement = containerRef.current.children[0].children[index] as HTMLElement;
+      if (sectionElement) {
+        sectionElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
     
     // Reset scrolling flag after animation completes
     setTimeout(() => {
       isScrolling.current = false;
     }, 1000);
-  };
+  }, []);
 
   // Navigation dots with labels and progress indicator
   const renderDots = () => {
     const sectionTitles = ['Home', 'About', 'Features', 'Contact'];
     
     return (
-      <div className="fixed right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col items-end gap-6">
-        <div className="flex flex-col items-center gap 1">
-          <div className="h-24 w-0.5 bg-gray-200 dark:bg-gray-700 relative">
-            <div 
-              className="absolute left-0 w-0.5 bg-green-500 transition-all duration-300"
-              style={{
-                height: `${(currentSection / (sections.length - 1)) * 100}%`,
-                top: 0
-              }}
-            />
-          </div>
+      <div className="fixed right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-6">
+        {/* Vertical progress line */}
+        <div className="h-32 w-0.5 bg-gray-200 dark:bg-gray-700 relative">
+          <div 
+            className="absolute left-0 w-0.5 bg-green-500 transition-all duration-300"
+            style={{
+              height: `${(currentSection / (sections.length - 1)) * 100}%`,
+              top: '0',
+              transform: 'translateY(0)',
+              willChange: 'height'
+            }}
+          />
         </div>
         
-        <div className="flex flex-col items-end gap-6">
+        {/* Navigation dots */}
+        <div className="flex flex-col items-center gap-6">
           {sections.map((section, index) => {
             const isActive = currentSection === index;
             return (
               <button
                 key={section.id}
                 onClick={() => goToSection(index)}
-                className="flex items-center gap-3 group"
+                className="flex items-center gap-3 group relative"
                 aria-label={`Go to ${section.label}`}
               >
-                <span 
-                  className={`text-xs font-medium transition-all duration-300 ${
-                    isActive ? 'text-green-600' : 'text-gray-500 group-hover:text-gray-700'
-                  }`}
-                >
+                <div className="absolute right-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   {sectionTitles[index]}
-                </span>
+                </div>
                 <span 
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     isActive 
-                      ? 'bg-green-600 scale-125 ring-4 ring-green-100' 
-                      : 'bg-gray-300 group-hover:bg-green-400 group-hover:scale-110'
+                      ? 'bg-green-600 scale-125 ring-4 ring-green-100 dark:ring-green-900/30' 
+                      : 'bg-gray-300 dark:bg-gray-600 group-hover:bg-green-500 group-hover:scale-110'
                   }`}
                 />
               </button>
@@ -113,22 +143,25 @@ const ScrollableLayout = () => {
 
   // Navigation arrows
   const renderArrows = () => (
-    <div className="fixed right-4 bottom-4 md:right-8 md:bottom-8 flex flex-col items-center gap-4 z-50">
+    <div className="fixed right-4 bottom-4 md:right-8 md:bottom-8 flex flex-col items-center gap-3 z-40">
       <button
         onClick={() => goToSection(currentSection - 1)}
         disabled={currentSection === 0}
-        className="p-2 md:p-3 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 disabled:opacity-30 shadow-lg"
+        className="p-2.5 md:p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 disabled:opacity-30 shadow-lg border border-gray-200 dark:border-gray-700"
         aria-label="Previous section"
       >
-        <ChevronUp className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+        <ChevronUp className="w-5 h-5 md:w-6 md:h-6 text-gray-700 dark:text-gray-300" />
       </button>
+      <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+        {currentSection + 1} / {sections.length}
+      </div>
       <button
         onClick={() => goToSection(currentSection + 1)}
         disabled={currentSection === sections.length - 1}
-        className="p-2 md:p-3 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 disabled:opacity-30 shadow-lg"
+        className="p-2.5 md:p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 disabled:opacity-30 shadow-lg border border-gray-200 dark:border-gray-700"
         aria-label="Next section"
       >
-        <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+        <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-gray-700 dark:text-gray-300" />
       </button>
     </div>
   );
@@ -136,40 +169,40 @@ const ScrollableLayout = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <Navbar currentSection={currentSection} sections={sections} onNavClick={goToSection} />
-      <main className="w-full">
+      <div className="w-full">
         <div 
-          className="relative h-screen w-full overflow-y-auto snap-y snap-mandatory" 
           ref={containerRef}
-          style={{
-            scrollBehavior: 'smooth',
-            WebkitOverflowScrolling: 'touch',
-            scrollSnapType: 'y mandatory'
-          }}
+          className="h-screen overflow-y-auto overflow-x-hidden scroll-smooth bg-white dark:bg-dark-background transition-colors duration-200 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent"
+          onScroll={handleScroll}
         >
-          {sections.map(({ id, component: Component }, index) => (
-            <section
-              key={id}
-              id={id}
-              className={`min-h-screen w-full snap-start relative overflow-hidden ${
-                index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-              }`}
-            >
-              <div className="h-full w-full flex flex-col">
-                <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1">
-                  <AnimatePresence>
-                    <Component onNavClick={goToSection} />
-                  </AnimatePresence>
-                </div>
-                {id === 'contact' && (
-                  <div className="w-full">
-                    <Footer />
+          <div className="pt-16">
+            {sections.map((section, index) => {
+              const SectionComponent = section.component;
+              return (
+                <section
+                  key={section.id}
+                  id={section.id}
+                  className={`min-h-screen flex items-center justify-center p-6 transition-colors duration-200 ${
+                    index % 2 === 0 
+                      ? 'bg-gray-50 dark:bg-gray-800' 
+                      : 'bg-white dark:bg-gray-900'
+                  }`}
+                >
+                  <div className="w-full max-w-7xl mx-auto">
+                    <AnimatePresence>
+                      <SectionComponent onNavClick={goToSection} />
+                    </AnimatePresence>
                   </div>
-                )}
-              </div>
-            </section>
-          ))}
+                </section>
+              );
+            })}
+            {/* Footer outside sections */}
+            <div className="w-full">
+              <Footer />
+            </div>
+          </div>
         </div>
-      </main>
+      </div>
       {renderDots()}
       {renderArrows()}
     </div>

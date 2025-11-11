@@ -76,9 +76,9 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
     }
   ];
   return (
-    <section ref={ref} id="home" className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-green-50 to-white">
+    <section ref={ref} id="home" className="min-h-screen flex flex-col justify-between bg-white dark:bg-transparent">
       {/* Main Content */}
-      <div className="flex-grow pt-32">
+      <div className="flex-grow pt-32 pb-12">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center mb-8">
           <motion.div 
@@ -87,7 +87,7 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
               <div className="pl-4 md:pl-0">
                 <div>Grow Fresh Food</div>
                 <div className="flex items-start">
@@ -102,7 +102,7 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
                       Indoors
                     </motion.span>
                     <motion.span 
-                      className="text-black inline-block"
+                      className="text-black dark:text-white inline-block"
                       initial="hidden"
                       animate={isInView ? "visible" : "hidden"}
                       variants={restTextVariants}
@@ -113,14 +113,14 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
                 </div>
               </div>
             </h1>
-            <p className="text-lg text-gray-600 mb-8 max-w-lg">
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
               Transform your home into a green oasis with AgroHaven's smart indoor gardening system. Grow fresh herbs, vegetables, and more with minimal effort and maximum yield.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-colors duration-200"
+                className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-medium transition-colors duration-200"
               >
                 Get Started
               </motion.button>
@@ -151,7 +151,7 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative">
-              <div className="absolute -top-3 -left-3 w-full h-full bg-green-100 rounded-2xl"></div>
+              <div className="absolute -top-3 -left-3 w-full h-full bg-green-100 dark:bg-green-900 rounded-2xl"></div>
               <div className="relative">
                 <img 
                   src="/agrohaven.png" 
@@ -159,14 +159,14 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
                   className="relative z-10 rounded-2xl shadow-lg w-full h-auto border-4 border-white"
                   style={{ transform: 'translate(8px, -8px)' }}
                 />
-                <div className="absolute -top-4 -right-4 bg-green-100 text-green-800 px-4 py-2 rounded-lg shadow-md z-20">
+                <div className="absolute -top-4 -right-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 px-4 py-2 rounded-lg shadow-lg z-20 border border-green-200 dark:border-green-700">
                   <div className="flex items-center">
                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.215.33-.331.69-.331 1.052v.243a4.5 4.5 0 01-.5 1.5 4.5 4.5 0 01-9 0 4.5 4.5 0 01-.5-1.5v-.243c0-.362-.116-.722-.331-1.052a2.5 2.5 0 01-.822-.88 1 1 0 00-1.45.385c-.27.405-.31.913-.11 1.35.2.436.56.75.98.75h1.293a1 1 0 01.707.293l.707.707a.5.5 0 00.354.146H5a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-.5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h.5a.5.5 0 00.354-.146l.707-.707a1 1 0 01.707-.293h1.293a1 1 0 00.98-.75c.2-.437.16-.945-.11-1.35z" clipRule="evenodd" />
                     </svg>
                     <div>
-                      <div className="font-bold text-lg">90% <span className="font-normal">Water Saved</span></div>
-                      <div className="text-xs">vs traditional farming</div>
+                      <div className="font-bold text-lg">90% <span className="font-medium">Water Saved</span></div>
+                      <div className="text-xs font-medium">vs traditional farming</div>
                     </div>
                   </div>
                 </div>
@@ -178,13 +178,13 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
       </div>
       
       {/* Stats Section */}
-      <div className="bg-white py-6 mt-auto">
+      <div className="bg-white dark:bg-transparent py-8 mt-auto">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, index) => (
               <motion.div 
                 key={stat.label}
-                className="bg-white p-4 rounded-xl shadow-lg border border-gray-100 flex flex-col items-center text-center"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 dark:border-gray-700/50 flex flex-col items-center text-center transform hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
@@ -192,11 +192,11 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
                   delay: 0.2 + (index * 0.1)
                 }}
               >
-                <div className="p-2 bg-green-100 rounded-full mb-2">
+                <div className="p-2 bg-green-100 dark:bg-green-900/70 rounded-full mb-3 border border-green-200/80 dark:border-green-700/50 shadow-inner">
                   {stat.icon}
                 </div>
-                <p className="text-xl md:text-2xl font-bold text-gray-800 mb-1">{stat.number}</p>
-                <p className="text-xs md:text-sm text-gray-600">{stat.label}</p>
+                <p className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1">{stat.number}</p>
+                <p className="text-xs md:text-sm text-gray-600 dark:text-gray-300">{stat.label}</p>
               </motion.div>
             ))}
           </div>

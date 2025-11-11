@@ -4,26 +4,26 @@ import { UsersIcon, LightBulbIcon, GlobeAltIcon, HeartIcon } from '@heroicons/re
 const About = () => {
   const teamMembers = [
     {
-      name: 'Reponse',
-      role: 'CEO',
+      name: 'UWAYO Ange Kevine',
+      role: 'Chief Executive Officer',
       bio: 'Leading AgroHaven with a vision for sustainable living and innovation.',
-      image: '/Reponse.png'
+      image: '/Ange.png'
     },
     {
-      name: 'Kevine',
-      role: 'COO',
+      name: 'IHIMBAZWE NIYIKORA Kevine',
+      role: 'Chief Operations Officer',
       bio: 'Ensuring operational excellence and customer satisfaction.',
       image: '/Kevine.png'
     },
     {
-      name: 'Ange',
-      role: 'CMO',
+      name: 'ABARUREMA HIRWA Emma Reponse',
+      role: 'Chief Marketing Officer',
       bio: 'Driving brand growth and customer engagement strategies.',
-      image: '/Ange.png'
+      image: '/Reponse.png'
     },
     {
-      name: 'Kendy',
-      role: 'CFO',
+      name: 'Kendy Neilla GISA',
+      role: 'Chief Executive Officer',
       bio: 'Financial strategist ensuring sustainable business growth.',
       image: '/Kendy.png'
     }
@@ -49,114 +49,79 @@ const About = () => {
     {
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
       ),
       title: 'Sustainability',
-      description: 'We\'re committed to practices that protect our planet for future generations.'
+      description: 'Committed to eco-friendly practices that protect our environment for future generations.'
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      title: 'Community',
-      description: 'We believe in building strong relationships with our customers and communities.'
+      title: 'Affordability',
+      description: 'Making sustainable living accessible to everyone through competitive pricing.'
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
       ),
-      title: 'Innovation',
-      description: 'We constantly push boundaries to create cutting-edge solutions for modern living.'
+      title: 'Support',
+      description: 'Dedicated customer service team ready to assist you with any inquiries.'
     }
-  ] as const;
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <main className="flex-1">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-700 text-white pt-48 pb-24 -mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-12">Our Story</h1>
-          <p className="text-xl max-w-3xl mx-auto mt-8">
-            Pioneering sustainable indoor farming solutions for a greener tomorrow
-          </p>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section className="py-16 md:py-24">
+      <section className="relative bg-gradient-to-b from-green-50 to-white py-20">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center">
-            <div className="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
-              <h2 className="text-3xl font-bold mb-6">Our Story</h2>
-              <p className="text-gray-700 mb-6">
-                AgroHaven was born from a simple idea: what if everyone could grow fresh, healthy food at home, 
-                regardless of space or gardening experience? Founded in 2025, our mission is to <strong>help people breathe cleaner air, eat fresher food, and live more sustainably - all from the comfort of their homes.</strong>
-              </p>
-              <p className="text-gray-700 mb-8">
-                What started as a small team of passionate individuals has grown into a movement, helping thousands 
-                of households transform their living spaces into productive, green oases.
-              </p>
-              <Link 
-                to="/features" 
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-200"
-              >
-                EXPLORE OUR FEATURES
-                <svg className="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </Link>
-            </div>
-            <div className="lg:w-1/2">
-              <div className="bg-gray-100 rounded-2xl p-2">
-                <img 
-                  src="/images/about-story.jpg" 
-                  alt="Our Story" 
-                  className="rounded-xl w-full h-auto"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Vision</h2>
-            <p className="text-2xl text-primary-600 font-medium">
-              To transform every home into a haven.
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About AgroHaven</h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Pioneering sustainable agricultural solutions for a greener tomorrow.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Our Values</h3>
-              <div className="grid grid-cols-1 gap-6">
-                {values.map((value, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="flex-shrink-0 h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center text-white mr-4">
-                      {value.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900">{value.title}</h4>
-                      <p className="text-gray-600 text-sm">{value.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+      {/* Mission Section */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+              <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                At AgroHaven, we're committed to transforming agricultural practices through innovation and sustainability. 
+                Our mission is to provide eco-friendly solutions that empower farmers and promote environmental stewardship.
+              </p>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                We believe in creating a future where sustainable agriculture is not just an option, but the standard for 
+                communities worldwide.
+              </p>
+              <Link 
+                to="/products" 
+                className="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+              >
+                Explore Our Products
+              </Link>
             </div>
-            <div className="bg-gray-100 rounded-xl overflow-hidden h-64 md:h-80">
-              <img 
-                src="/images/about/vision.jpg" 
-                alt="Sustainable farming vision" 
-                className="w-full h-full object-cover"
-              />
+            <div className="md:w-1/2">
+              <div className="bg-gray-100 rounded-xl overflow-hidden shadow-lg">
+                <img 
+                  src="/about-hero.jpg" 
+                  alt="Sustainable farming" 
+                  className="w-full h-auto"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -165,19 +130,40 @@ const About = () => {
       {/* Stats Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat) => {
-              const Icon = stat.icon;
-              return (
-                <div key={stat.id} className="bg-white p-6 rounded-xl shadow-sm text-center">
-                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="h-8 w-8 text-primary-600" />
-                  </div>
-                  <p className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</p>
-                  <p className="text-gray-600">{stat.name}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {stats.map((stat) => (
+              <div key={stat.id} className="p-6 bg-white rounded-xl shadow-sm">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                  <stat.icon className="w-6 h-6" />
                 </div>
-              );
-            })}
+                <p className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>
+                <p className="text-sm text-gray-500">{stat.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Our Values</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Guiding principles that shape our work and define our commitment to sustainability and innovation.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div key={index} className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 mb-4 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -219,29 +205,27 @@ const About = () => {
       {/* CTA Section */}
       <section className="py-16 bg-primary-700 text-white">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6">Join Our Journey</h2>
-            <p className="text-xl mb-8">
-              Be part of the sustainable farming revolution. Start growing your own fresh produce today.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a 
-                href="#" 
-                className="bg-white text-primary-700 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium cursor-pointer"
-              >
-                Get Started
-              </a>
-              <Link 
-                to="/contact" 
-                className="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 px-8 py-3 rounded-lg font-medium"
-              >
-                Contact Us
-              </Link>
-            </div>
+          <h2 className="text-3xl font-bold mb-6">Join Our Green Revolution</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Be part of the movement towards sustainable agriculture and a healthier planet.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/contact" 
+              className="bg-white text-primary-700 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-colors"
+            >
+              Contact Us
+            </Link>
+            <Link 
+              to="/about" 
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-primary-700 font-medium py-3 px-8 rounded-lg transition-colors"
+            >
+              Learn More
+            </Link>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

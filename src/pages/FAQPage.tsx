@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../contexts/ThemeContext';
 
 const FAQPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const handleContactClick = () => {
     // Navigate to home page first
@@ -44,7 +46,9 @@ const FAQPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+    <div className={`min-h-screen py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-200 ${
+      theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'
+    }`}>
       <div className="max-w-4xl mx-auto">
         <motion.div 
           className="text-center mb-12"
@@ -52,8 +56,10 @@ const FAQPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-gray-600">Find answers to common questions about our services and products</p>
+          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
+          <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+            Find answers to common questions about our services and products
+          </p>
           <div className="w-20 h-1 bg-green-600 mx-auto mt-4"></div>
         </motion.div>
 
@@ -61,28 +67,46 @@ const FAQPage = () => {
           {faqs.map((faq, index) => (
             <motion.div 
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md"
+              className={`p-6 rounded-lg shadow-md transition-colors duration-200 ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
-              <p className="text-gray-600">{faq.answer}</p>
+              <h3 className={`text-lg font-semibold mb-2 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                {faq.question}
+              </h3>
+              <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{faq.answer}</p>
             </motion.div>
           ))}
         </div>
 
         <motion.div 
-          className="mt-16 text-center bg-green-50 p-8 rounded-lg"
+          className={`mt-16 text-center p-8 rounded-lg transition-colors duration-200 ${
+            theme === 'dark' ? 'bg-green-900/30' : 'bg-green-50'
+          }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Still have questions?</h2>
-          <p className="text-gray-600 mb-6">Can't find the answer you're looking for? Our team is happy to help!</p>
+          <h2 className={`text-2xl font-bold mb-4 ${
+            theme === 'dark' ? 'text-white' : 'text-gray-900'
+          }`}>
+            Still have questions?
+          </h2>
+          <p className={`mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+            Can't find the answer you're looking for? Our team is happy to help!
+          </p>
           <button 
             onClick={handleContactClick}
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-200"
+            className={`inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md transition-colors duration-200 ${
+              theme === 'dark'
+                ? 'bg-green-600 hover:bg-green-700 text-white'
+                : 'bg-green-600 hover:bg-green-700 text-white'
+            }`}
           >
             Contact Us
           </button>

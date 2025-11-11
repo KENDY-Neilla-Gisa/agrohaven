@@ -12,7 +12,7 @@ const FeaturesSection = () => {
         'Cleaner than traditional methods'
       ],
       icon: (
-        <div className="p-2 rounded-lg bg-green-100">
+        <div className="p-2 rounded-lg bg-green-100 dark:bg-gray-800">
           <svg className="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
           </svg>
@@ -29,7 +29,7 @@ const FeaturesSection = () => {
         'Sustainable water usage'
       ],
       icon: (
-        <div className="p-2 rounded-lg bg-green-100">
+        <div className="p-2 rounded-lg bg-green-100 dark:bg-gray-800">
           <svg className="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0L12 2.69z" />
           </svg>
@@ -46,8 +46,8 @@ const FeaturesSection = () => {
         'Push notifications'
       ],
       icon: (
-        <div className="p-2 rounded-lg bg-green-100">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className="p-2 rounded-lg bg-green-100 dark:bg-gray-800">
+          <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
         </div>
@@ -63,8 +63,8 @@ const FeaturesSection = () => {
         'Promotes photosynthesis'
       ],
       icon: (
-        <div className="p-2 rounded-lg bg-green-100">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className="p-2 rounded-lg bg-green-100 dark:bg-gray-800">
+          <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
         </div>
@@ -80,8 +80,8 @@ const FeaturesSection = () => {
         'Year-round production'
       ],
       icon: (
-        <div className="p-2 rounded-lg bg-green-100">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className="p-2 rounded-lg bg-green-100 dark:bg-gray-800">
+          <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
@@ -97,8 +97,8 @@ const FeaturesSection = () => {
         'Always fresh'
       ],
       icon: (
-        <div className="p-2 rounded-lg bg-green-100">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className="p-2 rounded-lg bg-green-100 dark:bg-gray-800">
+          <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
         </div>
@@ -107,11 +107,11 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section id="features" className="py-20 bg-gray-50">
+    <section id="features" className="py-20 bg-gray-50 dark:bg-transparent">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <motion.h2 
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -120,7 +120,7 @@ const FeaturesSection = () => {
             Our Features
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -141,7 +141,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-white p-4 rounded-lg shadow-sm hover:shadow transition-all duration-200 flex flex-col h-full border border-gray-200 hover:border-green-500"
+              className="bg-white dark:bg-transparent p-4 rounded-lg shadow-sm hover:shadow dark:shadow-none transition-all duration-200 flex flex-col h-full border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-400"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -153,15 +153,15 @@ const FeaturesSection = () => {
                   {feature.icon}
                 </div>
                 <div className="ml-3 flex-1">
-                  <h3 className="text-lg font-semibold text-gray-800 leading-tight">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm mt-1">{feature.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{feature.description}</p>
                   <ul className="mt-2 space-y-1">
                     {feature.bulletPoints.map((point, i) => (
                       <li key={i} className="flex items-start">
-                        <svg className="w-3.5 h-3.5 text-green-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-3.5 h-3.5 text-green-600 dark:text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
-                        <span className="text-sm text-gray-600 leading-snug">{point}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-300 leading-snug">{point}</span>
                       </li>
                     ))}
                   </ul>
