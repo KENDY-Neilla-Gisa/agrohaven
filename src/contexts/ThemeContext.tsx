@@ -11,32 +11,31 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>('light');
-
-  useEffect(() => {
-    // Check for saved theme preference, default to light mode
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      // Ensure light mode is set by default
-      setTheme('light');
-      document.documentElement.classList.remove('dark');
+  // Get the theme from localStorage or default to 'light'
+  const [theme, setTheme] = useState<Theme>(() => {
+    // This runs only on the client side during initial render
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme') as Theme;
+      // Immediately update the class on the html element
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        return 'dark';
+      } else {
+        document.documentElement.classList.remove('dark');
+        return 'light';
+      }
     }
-  }, []);
+    return 'light'; // Default for server-side rendering
+  });
 
+  // Effect to handle theme changes after initial render
   useEffect(() => {
-    console.log('Theme changed to:', theme);
-    // Update the class on the root element and save preference
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
-      console.log('Added dark class to documentElement');
     } else {
       document.documentElement.classList.remove('dark');
-      console.log('Removed dark class from documentElement');
     }
     localStorage.setItem('theme', theme);
-    console.log('Saved theme to localStorage:', theme);
   }, [theme]);
 
   const toggleTheme = () => {
