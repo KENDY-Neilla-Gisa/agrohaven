@@ -93,13 +93,10 @@ const ScrollableLayout = () => {
     }, 1000);
   }, []);
 
-  // Navigation dots with labels and progress indicator
-  const renderDots = () => {
-    const sectionTitles = ['Home', 'About', 'Features', 'Contact'];
-    
+  // Vertical progress line only (dots removed)
+  const renderProgress = () => {
     return (
-      <div className="fixed right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-6">
-        {/* Vertical progress line */}
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:block">
         <div className="h-32 w-0.5 bg-gray-200 dark:bg-gray-700 relative">
           <div 
             className="absolute left-0 w-0.5 bg-green-500 transition-all duration-300"
@@ -111,59 +108,54 @@ const ScrollableLayout = () => {
             }}
           />
         </div>
-        
-        {/* Navigation dots */}
-        <div className="flex flex-col items-center gap-6">
-          {sections.map((section, index) => {
-            const isActive = currentSection === index;
-            return (
-              <button
-                key={section.id}
-                onClick={() => goToSection(index)}
-                className="flex items-center gap-3 group relative"
-                aria-label={`Go to ${section.label}`}
-              >
-                <div className="absolute right-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  {sectionTitles[index]}
-                </div>
-                <span 
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-green-600 scale-125 ring-4 ring-green-100 dark:ring-green-900/30' 
-                      : 'bg-gray-300 dark:bg-gray-600 group-hover:bg-green-500 group-hover:scale-110'
-                  }`}
-                />
-              </button>
-            );
-          })}
-        </div>
       </div>
     );
   };
 
-  // Navigation arrows
-  const renderArrows = () => (
-    <div className="fixed right-4 bottom-4 md:right-8 md:bottom-8 flex flex-col items-center gap-3 z-40">
-      <button
-        onClick={() => goToSection(currentSection - 1)}
-        disabled={currentSection === 0}
-        className="p-2.5 md:p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 disabled:opacity-30 shadow-lg border border-gray-200 dark:border-gray-700"
-        aria-label="Previous section"
-      >
-        <ChevronUp className="w-5 h-5 md:w-6 md:h-6 text-gray-700 dark:text-gray-300" />
-      </button>
-      <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-        {currentSection + 1} / {sections.length}
-      </div>
-      <button
-        onClick={() => goToSection(currentSection + 1)}
-        disabled={currentSection === sections.length - 1}
-        className="p-2.5 md:p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 disabled:opacity-30 shadow-lg border border-gray-200 dark:border-gray-700"
-        aria-label="Next section"
-      >
-        <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-gray-700 dark:text-gray-300" />
-      </button>
-    </div>
+  // Back to top button
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  // Check if scrolled to bottom
+  const checkScrollPosition = useCallback(() => {
+    if (!containerRef.current) return;
+    
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+    const isAtBottom = scrollHeight - (scrollTop + clientHeight) < 50; // 50px threshold from bottom
+    
+    setShowBackToTop(isAtBottom);
+  }, []);
+
+  // Add scroll event listener
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScrollPosition);
+      return () => container.removeEventListener('scroll', checkScrollPosition);
+    }
+  }, [checkScrollPosition]);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      setCurrentSection(0);
+    }
+  };
+
+  // Back to top button
+  const renderBackToTop = () => (
+    <button
+      onClick={scrollToTop}
+      className={`fixed right-6 bottom-6 p-3 rounded-full bg-green-600 hover:bg-green-700 text-white transition-all duration-300 shadow-lg z-40 ${
+        showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+      aria-label="Back to top"
+    >
+      <ChevronUp className="w-5 h-5" />
+    </button>
   );
 
   return (
@@ -172,7 +164,7 @@ const ScrollableLayout = () => {
       <div className="w-full">
         <div 
           ref={containerRef}
-          className="h-screen overflow-y-auto overflow-x-hidden scroll-smooth bg-white dark:bg-dark-background transition-colors duration-200 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent"
+          className="h-screen overflow-y-auto overflow-x-hidden scroll-smooth bg-white dark:bg-dark-background transition-colors duration-200 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:h-1.5"
           onScroll={handleScroll}
         >
           <div className="pt-16">
@@ -203,8 +195,8 @@ const ScrollableLayout = () => {
           </div>
         </div>
       </div>
-      {renderDots()}
-      {renderArrows()}
+      {renderProgress()}
+      {renderBackToTop()}
     </div>
   );
 };
