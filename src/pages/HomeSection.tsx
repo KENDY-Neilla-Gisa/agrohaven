@@ -9,33 +9,62 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.5 });
   
-  const textVariants = {
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.08,
+        delayChildren: 0.04 * i,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    })
+  };
+
+  const textVariant = {
     hidden: { 
       opacity: 0,
-      clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-      x: -20
+      y: 20,
+      rotateX: 90,
+      transformOrigin: 'bottom',
     },
-    visible: { 
-      opacity: 1,
-      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      x: 0,
-      transition: { 
-        duration: 1,
-        ease: [0.19, 1.0, 0.22, 1.0]
-      }
-    }
-  };
-  
-  const restTextVariants = {
-    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
+      y: 0,
+      rotateX: 0,
       transition: {
-        duration: 0.5,
-        delay: 0.8
+        type: 'spring',
+        damping: 12,
+        stiffness: 100,
+        mass: 0.5
       }
     }
   };
+
+  const highlightVariant = {
+    hidden: { 
+      opacity: 0,
+      scale: 0.8,
+      y: 20,
+      rotateX: 90,
+      transformOrigin: 'bottom',
+    },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        delay: 0.15 * i,
+        type: 'spring',
+        damping: 12,
+        stiffness: 100,
+        mass: 0.5
+      }
+    })
+  };
+
+  const text = "Grow Fresh Food Indoors All Year Round".split(' ');
 
   const stats = [
     { 
@@ -87,47 +116,61 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-              <div className="pl-4 md:pl-0">
-                <div>Grow Fresh Food</div>
-                <div className="flex items-start">
-                  <div className="w-4 flex-shrink-0"></div>
-                  <div>
+            <motion.h1 
+              className="text-4xl md:text-6xl font-semibold text-gray-900 dark:text-white mb-6 leading-tight"
+              variants={container}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              custom={0.5}
+            >
+              <div className="flex flex-col space-y-2">
+                <div className="flex flex-wrap items-baseline">
+                  {text.slice(0, 3).map((word, i) => (
                     <motion.span 
-                      className="inline-block text-green-600 relative"
-                      initial="hidden"
-                      animate={isInView ? "visible" : "hidden"}
-                      variants={textVariants}
+                      key={i}
+                      className="mr-2 inline-block"
+                      variants={textVariant}
                     >
-                      Indoors
+                      {word}
                     </motion.span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap items-baseline">
+                  <motion.span 
+                    className="text-green-600 mr-2"
+                    custom={2}
+                    variants={highlightVariant}
+                  >
+                    {text[3]}
+                  </motion.span>
+                  {text.slice(4).map((word, i) => (
                     <motion.span 
-                      className="text-black dark:text-white inline-block"
-                      initial="hidden"
-                      animate={isInView ? "visible" : "hidden"}
-                      variants={restTextVariants}
+                      key={i + 4}
+                      className="text-gray-900 dark:text-white mr-2"
+                      variants={textVariant}
+                      custom={i + 3}
                     >
-                      &nbsp;All Year Round
+                      {word}
                     </motion.span>
-                  </div>
+                  ))}
                 </div>
               </div>
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
+            </motion.h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed">
               Transform your home into a green oasis with AgroHaven's smart indoor gardening system. Grow fresh herbs, vegetables, and more with minimal effort and maximum yield.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-medium transition-colors duration-200"
+                className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-medium text-lg transition-colors duration-200"
               >
                 Get Started
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 border-2 border-green-600 text-green-600 rounded-full font-medium hover:bg-green-50 transition-colors duration-200"
+                className="px-8 py-3 border-2 border-green-600 text-green-600 rounded-full font-medium hover:bg-green-50 text-lg transition-colors duration-200"
                 onClick={() => {
                   const featuresSection = document.getElementById('features');
                   if (featuresSection) {
