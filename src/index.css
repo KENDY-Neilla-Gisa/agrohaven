@@ -53,10 +53,11 @@
   
   h1, h2, h3, h4, h5, h6, button, input, textarea, select, a, p, span, div {
     font-family: inherit;
+    font-weight: 400; /* Default to regular weight */
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    font-weight: 600; /* Slightly bolder than regular but not too bold */
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
   
@@ -75,7 +76,7 @@
 
 /* Component classes */
 .btn {
-  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:-translate-y-0.5;
+  @apply px-6 py-3 rounded-lg font-normal transition-all duration-300 transform hover:-translate-y-0.5;
 }
 
 .btn-primary {
