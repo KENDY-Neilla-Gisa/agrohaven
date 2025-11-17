@@ -4,11 +4,20 @@ import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import { resolve } from 'path'
 
-export default defineConfig({
+export default defineConfig(({ command: _command }) => ({
   plugins: [react()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   },
   css: {
@@ -21,4 +30,4 @@ export default defineConfig({
       ]
     }
   }
-})
+}))

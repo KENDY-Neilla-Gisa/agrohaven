@@ -7,28 +7,44 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "ts-node server.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@hookform/resolvers": "^5.2.2",
+    "@types/body-parser": "^1.19.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/nodemailer": "^7.0.3",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.552.0",
+    "nodemailer": "^7.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.66.0",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.20.1",
+    "resend": "^6.4.2",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
-    "@types/node": "^20.19.24",
-    "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.18",
+    "@types/next": "^9.0.0",
+    "@types/node": "^20.19.25",
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
+    "dotenv": "^17.2.3",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.6",
-    "typescript": "^5.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
     "vite": "^5.0.8"
   }
 }

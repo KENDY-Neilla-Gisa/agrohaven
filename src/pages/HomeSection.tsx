@@ -64,7 +64,11 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
     })
   };
 
-  const text = "Grow Fresh Food Indoors All Year Round".split(' ');
+  const titleParts = [
+    { text: "Grow Fresh Food ", highlight: false },
+    { text: "Indoors ", highlight: true },
+    { text: "All Year Round", highlight: false }
+  ];
 
   const stats = [
     { 
@@ -107,55 +111,42 @@ const HomeSection = ({ onNavClick }: HomeSectionProps) => {
   return (
     <section ref={ref} id="home" className="min-h-screen flex flex-col justify-between bg-white dark:bg-transparent">
       {/* Main Content */}
-      <div className="flex-grow pt-32 pb-12">
-        <div className="container mx-auto px-6">
+      <div className="flex-grow pt-16 sm:pt-24 md:pt-32 pb-12">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row items-center mb-8">
-          <motion.div 
-            className="md:w-1/2 mb-12 md:mb-0"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h1 
-              className="text-4xl md:text-6xl font-semibold text-gray-900 dark:text-white mb-6 leading-tight"
-              variants={container}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              custom={0.5}
+            <motion.div 
+              className="w-full md:w-1/2 mb-8 md:mb-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="flex flex-col space-y-2">
-                <div className="flex flex-wrap items-baseline">
-                  {text.slice(0, 3).map((word, i) => (
-                    <motion.span 
-                      key={i}
-                      className="mr-2 inline-block"
-                      variants={textVariant}
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </div>
-                <div className="flex flex-wrap items-baseline">
-                  <motion.span 
-                    className="text-green-600 mr-2"
-                    custom={2}
-                    variants={highlightVariant}
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                custom={0.5}
+                className="mb-6"
+              >
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight">
+                  <motion.div 
+                    className="flex flex-wrap items-center"
+                    variants={container}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
                   >
-                    {text[3]}
-                  </motion.span>
-                  {text.slice(4).map((word, i) => (
-                    <motion.span 
-                      key={i + 4}
-                      className="text-gray-900 dark:text-white mr-2"
-                      variants={textVariant}
-                      custom={i + 3}
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </motion.h1>
+                    {titleParts.map((part, i) => (
+                      <motion.span
+                        key={i}
+                        className={`${part.highlight ? 'text-green-600' : 'text-gray-900 dark:text-white'}`}
+                        variants={part.highlight ? highlightVariant : textVariant}
+                        custom={i}
+                      >
+                        {part.text}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </h1>
+              </motion.div>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed">
               Transform your home into a green oasis with AgroHaven's smart indoor gardening system. Grow fresh herbs, vegetables, and more with minimal effort and maximum yield.
             </p>

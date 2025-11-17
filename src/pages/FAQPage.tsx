@@ -1,6 +1,9 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
 
 const FAQPage = () => {
   const navigate = useNavigate();
@@ -45,11 +48,66 @@ const FAQPage = () => {
     },
   ];
 
+  // Sections for the Navbar
+  const [currentSection] = useState(0);
+  const sections = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'features', label: 'Features' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
+  // Handle navigation to other sections
+  const handleNavClick = (index: number) => {
+    if (sections[index].id === 'home') {
+      navigate('/');
+    } else {
+      navigate(`/#${sections[index].id}`);
+    }
+  };
+
+  // Progress bar state
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const windowHeight = scrollHeight - clientHeight;
+      const currentScroll = (scrollTop / windowHeight) * 100;
+      setScrollY(currentScroll);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className={`min-h-screen py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-200 ${
-      theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'
-    }`}>
-      <div className="max-w-4xl mx-auto">
+    <div className="relative min-h-screen">
+      {/* Navbar */}
+      <Navbar 
+        currentSection={currentSection} 
+        sections={sections} 
+        onNavClick={handleNavClick} 
+      />
+
+      {/* Progress Bar */}
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:block">
+        <div className="h-32 w-0.5 bg-gray-200 dark:bg-gray-700 relative">
+          <div 
+            className="absolute left-0 w-0.5 bg-green-500 transition-all duration-300"
+            style={{
+              height: `${scrollY}%`,
+              top: '0',
+              transform: 'translateY(0)',
+              willChange: 'height'
+            }}
+          />
+        </div>
+      </div>
+
+      <div className={`pt-16 pb-8 px-4 sm:px-6 lg:px-8 transition-colors duration-200 ${
+        theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+        <div className="max-w-4xl mx-auto">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -111,7 +169,11 @@ const FAQPage = () => {
             Contact Us
           </button>
         </motion.div>
+        </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

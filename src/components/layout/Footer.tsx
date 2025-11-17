@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-
-
   return (
     <footer className="bg-gray-900 text-white w-full font-sans">
       <div className="max-w-7xl mx-auto px-6 py-6">
@@ -64,9 +62,6 @@ const Footer = () => {
               &copy; {currentYear} AgroHaven. All rights reserved.
             </p>
             <div className="flex items-center space-x-4 mt-2 md:mt-0">
-              <Link to="/sitemap" className="text-gray-500 hover:text-white transition-colors">
-                Sitemap
-              </Link>
               <Link to="/faq" className="text-gray-500 hover:text-white transition-colors">
                 FAQ
               </Link>

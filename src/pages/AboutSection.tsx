@@ -137,22 +137,30 @@ const AboutSection = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative rounded-2xl overflow-hidden shadow-xl"
               >
-                <img 
-                  src="/us.jpg" 
-                  alt="Our Team"
-                  className="w-full h-auto object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
-                  }}
-                />
+                <div className="relative pb-[90%] w-full -mt-4">
+                  <img 
+                    src="/us.jpg" 
+                    alt="Our Team"
+                    className="absolute w-full h-full object-cover"
+                    style={{ 
+                      objectPosition: 'center 20%',
+                      height: '130%',
+                      top: '-15%',
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
+                    }}
+                  />
+                </div>
               </motion.div>
             </div>
 
             {/* Right Column - Meet the Team */}
             <div className="md:w-1/2 order-1 md:order-2">
               <motion.div 
-                className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg"
+                className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg h-full flex flex-col"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

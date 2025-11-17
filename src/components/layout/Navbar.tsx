@@ -191,6 +191,18 @@ const Navbar = ({ currentSection, sections, onNavClick }: NavbarProps) => {
                 >
                   Contact Us
                 </button>
+                <button 
+                  onClick={toggleTheme}
+                  className="w-full mt-2 px-4 py-3 rounded-lg text-base font-medium text-left flex items-center justify-between text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                  aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                >
+                  <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+                  {theme === 'light' ? (
+                    <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                  ) : (
+                    <Sun className="w-5 h-5 text-yellow-400" />
+                  )}
+                </button>
               </div>
             </motion.div>
           )}
